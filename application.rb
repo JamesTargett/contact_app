@@ -9,6 +9,18 @@ class Application
   def run
     show_main_menu
     input = gets.chomp
+    if input == "quit"
+      exit
+    elsif input == "new"
+
+    elsif input == "list"
+
+    # elsif input == "show #{:id}"
+        
+    else
+      puts "Sorry, '#{input}' is not a valid response. Select again."
+      run
+    end
   end
   
   # Prints the main menu only
@@ -19,5 +31,5 @@ class Application
     puts " show :id - Display contact details"
     print "> "
   end
- 
+
 end
