@@ -10,9 +10,15 @@ class Application
     show_main_menu
     input = gets.chomp
     if input == "quit"
+      puts "See ya."
       exit
     elsif input == "new"
-
+      puts "Full name?"
+      name = gets.chomp
+      puts "Email?"
+      email = gets.chomp
+      @contacts << Contact.new(name, email)
+      run
     elsif input == "list"
 
     # elsif input == "show #{:id}"

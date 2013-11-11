@@ -12,6 +12,7 @@ class Contact
   
   def to_s
     # TODO: return string representation of Contact
+    "#{:first_name} #{:last_name} (#{:email})"
   end
   
 end
