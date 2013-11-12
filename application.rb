@@ -17,9 +17,14 @@ class Application
       name = gets.chomp
       puts "Email?"
       email = gets.chomp
+      # is this doable? pushing an object of the Contact class into the array without being saved as a variable?
       @contacts << Contact.new(name, email)
       run
     elsif input == "list"
+      # if the @contacts array contains objects of the class Contact, shouldn't we be able to call the to_s method on each object in the array?
+      @contacts.each do |entry|
+        entry.to_s
+      end
 
     # elsif input == "show #{:id}"
         
