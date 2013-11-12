@@ -20,7 +20,8 @@ class Application
         input_new
       elsif input == "list"
         input_list
-      elsif input == "show #{:id}"
+      elsif input == "show #{@contacts[]}"
+        show_id
       else
         puts "Sorry, '#{input}' is not a valid response. Select again."
         run
@@ -28,6 +29,16 @@ class Application
     end
   end
   
+  # Prints the main menu only
+  def show_main_menu
+    puts "Welcome to the app. What's next?"
+    puts " new      - Create a new contact"
+    puts " list     - List all contacts"
+    puts " show :id - Display contact details"
+    puts " quit     - Exit the program"
+    print "> "
+  end
+
   # Collect input and push it to the @contacts array
   def input_new
     puts "Full name?"
@@ -44,16 +55,6 @@ class Application
       puts i.to_s << "#{contact.to_s}"
     end
     run
-  end
-
-  # Prints the main menu only
-  def show_main_menu
-    puts "Welcome to the app. What's next?"
-    puts " new      - Create a new contact"
-    puts " list     - List all contacts"
-    puts " show :id - Display contact details"
-    puts " quit     - Exit the program"
-    print "> "
   end
 
 end
