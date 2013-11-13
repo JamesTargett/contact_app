@@ -14,15 +14,13 @@ class Contact
     "#{@first_name} #{@last_name}"
   end
 
-  # def namesplitter
-  #   @name.split(" ")
-  #   @first_name = name
-  #   @last_name = name[1]
-  # end
+  def last_name_initial
+    @last_name_initial = @last_name[0]
+  end
   
   # Return string representation of Contact
   def to_s
-    " : #{first_name} #{last_name} (#{email})"
+    "#{first_name} #{last_name_initial} (#{email})"
   end
   
 end

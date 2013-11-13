@@ -7,7 +7,7 @@ class Application
       Contact.new("Peter Parker", "peterparkersciencenerd.gmail.com") 
     ]
   end
- 
+
   # Run through an infinite loop that displays the main menu/interface.
   def run
     loop do
@@ -20,8 +20,9 @@ class Application
         input_new
       elsif input == "list"
         input_list
-      elsif input == "show #{@contacts[]}"
-        show_id
+      elsif input.start_with?("show")
+        show, @id = input.split
+        input_show
       else
         puts "Sorry, '#{input}' is not a valid response. Select again."
         run
@@ -52,9 +53,17 @@ class Application
   # Return index of Object in Array, change it into a string and concatenate with the Object (of Contact class) having called it's to_s method
   def input_list
     @contacts.each_with_index do |contact, i|
-      puts i.to_s << "#{contact.to_s}"
+      puts i.to_s << " : " << "#{contact.to_s}"
     end
     run
+  end
+
+  def input_show
+    if @id.to_i <= @contacts.length
+    puts @contacts[@id.to_i]
+    else 
+      puts "Contact not found."
+    end
   end
 
 end
