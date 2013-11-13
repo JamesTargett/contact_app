@@ -1,14 +1,14 @@
-class Contact
+class Contact < ActiveRecord::Base
   
-  attr_accessor :first_name
-  attr_accessor :last_name
-  attr_accessor :email
+  # attr_accessor :first_name
+  # attr_accessor :last_name
+  # attr_accessor :email
   
 
-  def initialize(name, email)
-    @first_name, @last_name = name.split
-    @email = email
-  end
+  # def initialize(name, email)
+  #   @first_name, @last_name = name.split
+  #   @email = email
+  # end
 
   def full_name
     "#{@first_name} #{@last_name}"

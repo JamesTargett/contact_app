@@ -2,10 +2,10 @@ class Application
  
   def initialize
     # Start with an empty array of contacts.
-    @contacts = [ 
-      Contact.new("Scott Summers", "ssummers@gmail.com"), 
-      Contact.new("Peter Parker", "peterparkersciencenerd@gmail.com") 
-    ]
+    # @contacts = [ 
+    #   Contact.new("Bruce Banner", "iwearpurplepants@gmail.com"), 
+    #   Contact.new("Peter Parker", "peterparkersciencenerd@gmail.com") 
+    # ]
   end
 
   # Run through an infinite loop that displays the main menu/interface.
@@ -43,28 +43,33 @@ class Application
   def input_new
     puts "Email?"
     email = gets.chomp.downcase
-    if @contacts.detect { |c| c.email == email }
+    if Contact.all.detect { |c| c.email == email }
       puts "That contact already exists and cannot be created."
     else
       puts "Full name?"
       name = gets.chomp
-      @contacts << Contact.new(name, email)
+      first_name, last_name = name.split
+      puts "Occupation?"
+      occupation = gets.chomp
+      contact = Contact.create(first_name: "first_name", last_name: "last_name", email: "email")
     end
   end
 
   # Return index of Object in Array, change it into a string and concatenate with the Object (of Contact class) having called it's to_s method
   def input_list
-    @contacts.each_with_index do |contact, i|
+    Contact.all.each_with_index do |contact, i|
       puts i.to_s << " : " << "#{contact.to_s}"
     end
   end
 
   def input_show
-    if @id.to_i <= @contacts.length
-    puts @contacts[@id.to_i]
-    else 
-      puts "Contact not found."
-    end
+    @id.to_i
+    contact = Contact.find_by(id: @id)
+    # if
+    # puts Contact.all[@id.to_i]
+    # else 
+    #  puts "Contact not found."
+    # end
   end
 
 end
