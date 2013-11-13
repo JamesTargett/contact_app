@@ -42,16 +42,14 @@ class Application
   # Collect input and push it to the @contacts array
   def input_new
     puts "Email?"
-    email = gets.chomp
-    if @contacts.each do |contact|
-      contact.include?(email)
-      end
+    email = gets.chomp.downcase
+    if @contacts.detect { |c| c.email == email }
       puts "That contact already exists and cannot be created."
     else
       puts "Full name?"
       name = gets.chomp
+      @contacts << Contact.new(name, email)
     end
-    @contacts << Contact.new(name, email)
   end
 
   # Return index of Object in Array, change it into a string and concatenate with the Object (of Contact class) having called it's to_s method
