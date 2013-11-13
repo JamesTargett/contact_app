@@ -4,7 +4,7 @@ class Application
     # Start with an empty array of contacts.
     @contacts = [ 
       Contact.new("Scott Summers", "ssummers@gmail.com"), 
-      Contact.new("Peter Parker", "peterparkersciencenerd.gmail.com") 
+      Contact.new("Peter Parker", "peterparkersciencenerd@gmail.com") 
     ]
   end
 
@@ -25,7 +25,6 @@ class Application
         input_show
       else
         puts "Sorry, '#{input}' is not a valid response. Select again."
-        run
       end
     end
   end
@@ -42,12 +41,17 @@ class Application
 
   # Collect input and push it to the @contacts array
   def input_new
-    puts "Full name?"
-    name = gets.chomp
     puts "Email?"
     email = gets.chomp
+    if @contacts.each do |contact|
+      contact.include?(email)
+      end
+      puts "That contact already exists and cannot be created."
+    else
+      puts "Full name?"
+      name = gets.chomp
+    end
     @contacts << Contact.new(name, email)
-    run
   end
 
   # Return index of Object in Array, change it into a string and concatenate with the Object (of Contact class) having called it's to_s method
@@ -55,7 +59,6 @@ class Application
     @contacts.each_with_index do |contact, i|
       puts i.to_s << " : " << "#{contact.to_s}"
     end
-    run
   end
 
   def input_show
