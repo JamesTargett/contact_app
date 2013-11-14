@@ -3,7 +3,7 @@ class Application
   def initialize
   end
 
-  # Infinite loop that runs main menu and options.
+  # Infinite loop to run menu and options
   def run
     loop do
       show_main_menu
@@ -29,7 +29,7 @@ class Application
     end
   end
   
-  # Displays the main menu
+  # Display the main menu
   def show_main_menu
     puts "Welcome to the app. What's next?"
     puts " new        - Create a new contact"
@@ -41,7 +41,7 @@ class Application
     print "> "
   end
 
-  # Collect input and add to ActiveRecord
+  # Add new contact
   def input_new
     puts "Email?"
     email = gets.chomp.downcase
@@ -59,24 +59,26 @@ class Application
     end
   end
 
+  # List all contacts
+  def input_list
+    Contact.all.each_with_index do |contact, i|
+      puts i.to_s << " : " << "#{contact.to_s}"
+    end
+  end
+
+  # Show a contact via :id
   def input_show
     @id.to_i
     contact = Contact.find(@id)
     puts contact.to_s 
   end
 
+  # Remove a contact
   def input_delete
     @id.to_i
     contact = Contact.find(@id)
     puts "Contact '#{contact.to_s}' removed from database."
     contact.destroy
   end
-
-  # Return list of Contacts in ActiveRecord::Base
-  # def input_list
-  #  Contact.all.each_with_index do |contact, i|
-  #    puts i.to_s << " : " << "#{contact.to_s}"
-  #  end
-  # end
 
 end
