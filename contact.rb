@@ -1,26 +1,20 @@
 class Contact < ActiveRecord::Base
-  
-  # attr_accessor :first_name
-  # attr_accessor :last_name
-  # attr_accessor :email
-  
 
-  # def initialize(name, email)
-  #   @first_name, @last_name = name.split
-  #   @email = email
-  # end
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
+  validates :first_name, presence: true
+  validates :last_name,  presence: true
 
   def full_name
     "#{@first_name} #{@last_name}"
   end
 
-  def last_name_initial
-    @last_name_initial = @last_name[0]
-  end
+  #def last_name_initial
+  #  @last_name_initial = @last_name[0]
+  # end
   
   # Return string representation of Contact
-  def to_s
-    "#{first_name} #{last_name_initial} (#{email})"
-  end
+   def to_s
+    "#{first_name} #{last_name} - #{occupation} (#{email})"
+   end
   
 end

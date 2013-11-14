@@ -1,14 +1,9 @@
 class Application
  
   def initialize
-    # Start with an empty array of contacts.
-    # @contacts = [ 
-    #   Contact.new("Bruce Banner", "iwearpurplepants@gmail.com"), 
-    #   Contact.new("Peter Parker", "peterparkersciencenerd@gmail.com") 
-    # ]
   end
 
-  # Run through an infinite loop that displays the main menu/interface.
+  # Infinite loop that runs main menu and options.
   def run
     loop do
       show_main_menu
@@ -20,26 +15,33 @@ class Application
         input_new
       elsif input == "list"
         input_list
+      elsif input == "importance"
+        input_importance
       elsif input.start_with?("show")
         show, @id = input.split
         input_show
+      elsif input.start_with?("delete")
+        delete, @id = input.split
+        input_delete
       else
         puts "Sorry, '#{input}' is not a valid response. Select again."
       end
     end
   end
   
-  # Prints the main menu only
+  # Displays the main menu
   def show_main_menu
     puts "Welcome to the app. What's next?"
-    puts " new      - Create a new contact"
-    puts " list     - List all contacts"
-    puts " show :id - Display contact details"
-    puts " quit     - Exit the program"
+    puts " new        - Create a new contact"
+    puts " list       - List all contacts"
+    puts " importance - List contacts by importance"
+    puts " show :id   - Display contact details"
+    puts " delete :id - Remove contact"
+    puts " quit       - Exit the program"
     print "> "
   end
 
-  # Collect input and push it to the @contacts array
+  # Collect input and add to ActiveRecord
   def input_new
     puts "Email?"
     email = gets.chomp.downcase
@@ -51,25 +53,30 @@ class Application
       first_name, last_name = name.split
       puts "Occupation?"
       occupation = gets.chomp
-      contact = Contact.create(first_name: "first_name", last_name: "last_name", email: "email")
-    end
-  end
-
-  # Return index of Object in Array, change it into a string and concatenate with the Object (of Contact class) having called it's to_s method
-  def input_list
-    Contact.all.each_with_index do |contact, i|
-      puts i.to_s << " : " << "#{contact.to_s}"
+      puts "How important is this person?"
+      importance = gets.chomp
+      contact = Contact.create(first_name: first_name, last_name: last_name, email: email, occupation: occupation, importance: importance)
     end
   end
 
   def input_show
     @id.to_i
-    contact = Contact.find_by(id: @id)
-    # if
-    # puts Contact.all[@id.to_i]
-    # else 
-    #  puts "Contact not found."
-    # end
+    contact = Contact.find(@id)
+    puts contact.to_s 
   end
+
+  def input_delete
+    @id.to_i
+    contact = Contact.find(@id)
+    puts "Contact '#{contact.to_s}' removed from database."
+    contact.destroy
+  end
+
+  # Return list of Contacts in ActiveRecord::Base
+  # def input_list
+  #  Contact.all.each_with_index do |contact, i|
+  #    puts i.to_s << " : " << "#{contact.to_s}"
+  #  end
+  # end
 
 end
