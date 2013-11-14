@@ -45,9 +45,9 @@ class Application
   def input_new
     puts "Email?"
     email = gets.chomp.downcase
-    if Contact.all.detect { |c| c.email == email }
-      puts "That contact already exists and cannot be created."
-    else
+    # if Contact.all.detect { |c| c.email == email }
+    #   puts "That contact already exists and cannot be created."
+    # else
       puts "Full name?"
       name = gets.chomp
       first_name, last_name = name.split
@@ -56,7 +56,14 @@ class Application
       puts "How important is this person?"
       importance = gets.chomp
       contact = Contact.create(first_name: first_name, last_name: last_name, email: email, occupation: occupation, importance: importance)
-    end
+      unless contact.valid?
+        # failed
+        # output the contact.errors.full_messages
+        contact.errors.full_messages.each do |messages|
+        puts messages
+      end
+      end
+    # end
   end
 
   # List all contacts
