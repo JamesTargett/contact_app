@@ -8,7 +8,7 @@ class Contact < ActiveRecord::Base
 
   # Return string representation of Contact
   def to_s
-  "#{first_name} #{last_name} - #{occupation} (#{email})"
+    "#{first_name} #{last_name} - #{occupation} (#{email})"
   end
   
 end
