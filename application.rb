@@ -15,8 +15,6 @@ class Application
         input_new
       elsif input == "list"
         input_list
-      elsif input == "importance"
-        input_importance
       elsif input.start_with?("show")
         show, @id = input.split
         input_show
@@ -34,7 +32,6 @@ class Application
     puts "Welcome to the app. What's next?"
     puts " new        - Create a new contact"
     puts " list       - List all contacts"
-    puts " importance - List contacts by importance"
     puts " show :id   - Display contact details"
     puts " delete :id - Remove contact"
     puts " quit       - Exit the program"
@@ -45,9 +42,6 @@ class Application
   def input_new
     puts "Email?"
     email = gets.chomp.downcase
-    # if Contact.all.detect { |c| c.email == email }
-    #   puts "That contact already exists and cannot be created."
-    # else
       puts "Full name?"
       name = gets.chomp
       first_name, last_name = name.split
@@ -57,13 +51,10 @@ class Application
       importance = gets.chomp
       contact = Contact.create(first_name: first_name, last_name: last_name, email: email, occupation: occupation, importance: importance)
       unless contact.valid?
-        # failed
-        # output the contact.errors.full_messages
         contact.errors.full_messages.each do |messages|
-        puts messages
+          puts messages
+        end
       end
-      end
-    # end
   end
 
   # List all contacts
