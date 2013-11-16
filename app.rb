@@ -64,9 +64,3 @@ get "/contacts/:id/delete" do
   @contact = Contact.find(params[:id]).destroy
   redirect "/"
 end
- 
-# Our About Me page.
-get "/about" do
-# REMOVED - DEBUGGING  @title = "About Me"
-  erb :"pages/about"
-end
