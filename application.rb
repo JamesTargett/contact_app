@@ -12,15 +12,15 @@ class Application
         puts "See ya."
         exit
       elsif input == "new"
-        input_new
+        new_contact
       elsif input == "list"
-        input_list
+        list_contact
       elsif input.start_with?("show")
-        show, @id = input.split
-        input_show
+        show, id = input.split
+        show_contact(id)
       elsif input.start_with?("delete")
-        delete, @id = input.split
-        input_delete
+        delete, id = input.split
+        delete_contact(id)
       else
         puts "Sorry, '#{input}' is not a valid response. Select again."
       end
@@ -39,7 +39,7 @@ class Application
   end
 
   # Add new contact
-  def input_new
+  def new_contact
     puts "Email?"
     email = gets.chomp.downcase
       puts "Full name?"
@@ -49,7 +49,13 @@ class Application
       occupation = gets.chomp
       puts "How important is this person?"
       importance = gets.chomp
-      contact = Contact.create(first_name: first_name, last_name: last_name, email: email, occupation: occupation, importance: importance)
+      contact = Contact.create(
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        occupation: occupation,
+        importance: importance
+      )
       unless contact.valid?
         contact.errors.full_messages.each do |messages|
           puts messages
@@ -58,23 +64,21 @@ class Application
   end
 
   # List all contacts
-  def input_list
+  def list_contact
     Contact.all.each_with_index do |contact, i|
       puts i.to_s << " : " << "#{contact.to_s}"
     end
   end
 
   # Show a contact via :id
-  def input_show
-    @id.to_i
-    contact = Contact.find(@id)
+  def show_contact(id)
+    contact = Contact.find(id)
     puts contact.to_s 
   end
 
   # Remove a contact
-  def input_delete
-    @id.to_i
-    contact = Contact.find(@id)
+  def delete_contact(id)
+    contact = Contact.find(id)
     puts "Contact '#{contact.to_s}' removed from database."
     contact.destroy
   end

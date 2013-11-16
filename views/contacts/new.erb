@@ -1,0 +1,24 @@
+<h1>New Post</h1>
+<form action="/contacts" method="post">
+  <label for="contact_email">Email:</label><br />
+  <input id="contact_email" name="contact[email]" type="text" value="<%= @contact %>" />
+  <br />
+ 
+  <label for="contact_first_name">First name:</label><br />
+  <input id="contact_first_name" name="contact[first_name]" type="text" value="<%= @contact %>" />
+  <br />
+ 
+  <label for="contact_last_name">Last name:</label><br />
+  <input id="contact_last_name" name="contact[last_name]" type="text" value="<%= @contact %>" />
+  <br />
+
+  <label for="contact_occupation">Occupation:</label><br />
+  <input id="contact_occupation" name="contact[occupation]" type="text" value="<%= @contact %>" />
+  <br />
+
+  <label for="contact_importance">Importance:</label><br />
+  <input id="contact_importance" name="contact[importance]" type="text" value="<%= @contact %>" />
+  <br />
+
+  <input type="submit" value="Create Post" />
+</form> 

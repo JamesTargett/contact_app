@@ -1,0 +1,14 @@
+<h1>Edit Post</h1>
+<form action="/contacts/<%= @contact.id %>" method="post">
+  <input type="hidden" name="_method" value="put" /> 
+ 
+  <label for="contact_title">Title:</label><br />
+  <input id="contact_title" name="contact[title]" type="text" value="<%= @contact %>" />
+  <br />
+ 
+  <label for="contact_body">Body:</label><br />
+  <textarea id="contact_body" name="contact[body]" rows="5"><%= @contact %></textarea>
+  <br />
+ 
+  <input type="submit" value="Edit Post" />
+</form>
